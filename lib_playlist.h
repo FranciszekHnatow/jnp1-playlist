@@ -6,5 +6,6 @@
 #define PLAYLIST_LIB_PLAYLIST_H
 
 #include "playlist/player.h"
+#include "modes/modes.h"
 
 #endif //PLAYLIST_LIB_PLAYLIST_H
