@@ -10,6 +10,7 @@
 
 class Player {
 public:
+	//TODO Factory Pattern?
 	Playlist &createPlaylist(const char *name);
 	Element &openFile(File file);
 
