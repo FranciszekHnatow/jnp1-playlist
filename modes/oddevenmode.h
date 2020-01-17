@@ -7,7 +7,11 @@
 
 #include "mode.h"
 class OddEvenMode : public Mode {
+public:
+	OddEvenMode() = default;
+	~OddEvenMode() = default;
 
+	void play(std::deque<Element> const &playList) const override;
 };
 
 

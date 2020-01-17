@@ -10,8 +10,8 @@
 #include "shufflemode.h"
 #include "sequencemode.h"
 
-OddEvenMode &createOddEvenMode();
-ShuffleMode &createShuffleMode(size_t seed);
-SequenceMode &createSequenceMode();
+OddEvenMode createOddEvenMode();
+ShuffleMode createShuffleMode(size_t seed);
+SequenceMode createSequenceMode();
 
 #endif //PLAYLIST_MODES_H
