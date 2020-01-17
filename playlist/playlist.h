@@ -7,6 +7,8 @@
 
 #include <cstddef>
 #include "element.h"
+#include "../modes/mode.h"
+
 
 class Playlist : public Element {
 public:
@@ -14,6 +16,7 @@ public:
 	void add(Element &element, size_t position);
 	void remove();
 	void remove(size_t position);
+	void setMode(Mode *mode);
 
 	//TODO zdecydować czy chcemy referencję i overloadowanie operatora
 	// czy raczej wolimy przekazywać wszędzie wskaźniki (z uwagi na przykład z playlist_example.cc, linia 20:

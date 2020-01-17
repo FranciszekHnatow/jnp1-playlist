@@ -4,14 +4,14 @@
 
 #include "modes.h"
 
-OddEvenMode createOddEvenMode() {
-	return OddEvenMode();
+Mode *createOddEvenMode() {
+	return new OddEvenMode();
 }
 
-ShuffleMode createShuffleMode(size_t seed) {
+Mode *createShuffleMode(size_t seed) {
 	return ShuffleMode(seed);
 }
 
-SequenceMode createSequenceMode() {
+Mode *createSequenceMode() {
 	return SequenceMode();
 }
