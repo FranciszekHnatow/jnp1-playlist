@@ -10,7 +10,7 @@
 
 class ShuffleMode : public Mode {
 public:
-	explicit ShuffleMode(size_t seed) : engine(seed) {};
+	explicit ShuffleMode(size_t seed) : engine(seed){};
 	~ShuffleMode() = default;
 
 	void play(std::deque<Element> const &playList) const override;
