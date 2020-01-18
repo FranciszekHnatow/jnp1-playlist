@@ -14,7 +14,7 @@ class Mode {
 public:
 	virtual void play(std::deque<Element> const &playList) const = 0;
 	Mode() = default;
-	~Mode() = default;
+	virtual ~Mode() = default;
 };
 
 #endif //PLAYLIST_BASEMODE_H

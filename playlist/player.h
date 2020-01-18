@@ -11,8 +11,8 @@
 class Player {
 public:
 	//TODO Factory Pattern?
-	std::unique_ptr<PlayList> createPlaylist(const char *name);
-	std::unique_ptr<Element> openFile(File file);
+	std::shared_ptr<PlayList> createPlaylist(const char *name);
+	std::shared_ptr<Element> openFile(File file);
 };
 
 #endif //PLAYLIST_PLAYER_H

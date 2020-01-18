@@ -3,3 +3,7 @@
 //
 
 #include "playlist.h"
+
+PlayList::~PlayList() {
+	delete(mode.get());
+}
