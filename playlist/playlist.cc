@@ -39,3 +39,9 @@ void PlayList::remove() {
 void PlayList::remove(size_t position) {
 	elements.erase(elements.begin() + position);
 }
+
+bool PlayList::canAdd(const std::shared_ptr<Element> &element) {
+
+
+	return true;
+}

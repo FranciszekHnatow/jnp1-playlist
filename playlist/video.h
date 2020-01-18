@@ -5,6 +5,8 @@
 #ifndef PLAYLIST_VIDEO_H
 #define PLAYLIST_VIDEO_H
 
+#include "media.h"
+
 class Video : Media {
 
 };
