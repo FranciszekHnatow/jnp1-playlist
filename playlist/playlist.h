@@ -10,20 +10,16 @@
 #include "../modes/mode.h"
 
 
-class Playlist : public Element {
+class PlayList : public Element {
 public:
-	void add(Element &element);
-	void add(Element &element, size_t position);
+	void add(pElement element);
+	void add(pElement element, size_t position);
 	void remove();
 	void remove(size_t position);
-	void setMode(Mode *mode);
+	void setMode(pMode mode);
 
-	//TODO zdecydować czy chcemy referencję i overloadowanie operatora
-	// czy raczej wolimy przekazywać wszędzie wskaźniki (z uwagi na przykład z playlist_example.cc, linia 20:
-	// mishmash->add(..)
-	Playlist *operator->() noexcept {
-		return this;
-	}
 };
+
+using pPlayList = std::unique_ptr<PlayList>;
 
 #endif //PLAYLIST_PLAYLIST_H

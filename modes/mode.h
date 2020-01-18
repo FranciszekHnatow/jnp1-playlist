@@ -8,6 +8,7 @@
 #include <deque>
 class Element;
 
+
 // TODO tutaj na pewno przyda się Strategy i Factory Patterns
 class Mode {
 public:
@@ -15,5 +16,7 @@ public:
 	Mode() = default;
 	~Mode() = default;
 };
+
+using pMode = std::unique_ptr<Mode>;
 
 #endif //PLAYLIST_BASEMODE_H

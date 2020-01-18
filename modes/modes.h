@@ -6,12 +6,14 @@
 #define PLAYLIST_MODES_H
 
 #include <cstddef>
+#include <memory>
 #include "oddevenmode.h"
 #include "shufflemode.h"
 #include "sequencemode.h"
 
-Mode *createOddEvenMode();
-Mode *createShuffleMode(size_t seed);
-Mode *createSequenceMode();
+
+pMode createOddEvenMode();
+pMode createShuffleMode(size_t seed);
+pMode createSequenceMode();
 
 #endif //PLAYLIST_MODES_H

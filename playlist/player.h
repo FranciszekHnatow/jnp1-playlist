@@ -11,9 +11,8 @@
 class Player {
 public:
 	//TODO Factory Pattern?
-	Playlist &createPlaylist(const char *name);
-	Element &openFile(File file);
-
+	pPlayList createPlaylist(const char *name);
+	pElement openFile(File file);
 };
 
 #endif //PLAYLIST_PLAYER_H

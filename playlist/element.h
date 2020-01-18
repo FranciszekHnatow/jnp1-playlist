@@ -5,6 +5,9 @@
 #ifndef PLAYLIST_ELEMENT_H
 #define PLAYLIST_ELEMENT_H
 
+
+#include <memory>
+
 class Element {
 public:
 	void play() const;
@@ -12,6 +15,8 @@ public:
 	// w drzewie. (To drugie chyba lepsze, bo pewnie i tak będzie trzeba trzymać listę/mapę identyfikującą wszystkie
 	// playlisty w drzewie, żeby nie dodawać powtórek)
 };
+
+using pElement = std::unique_ptr<Element>;
 
 
 #endif //PLAYLIST_ELEMENT_H
