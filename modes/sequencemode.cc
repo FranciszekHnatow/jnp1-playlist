@@ -5,8 +5,8 @@
 #include "sequencemode.h"
 #include "../playlist/element.h"
 
-void SequenceMode::play(std::deque<Element> const &playList) const {
-	for (Element element : playList) {
-		element.play();
+void SequenceMode::play(std::deque<std::shared_ptr<Element>> const &playList) const {
+	for (std::shared_ptr<Element> element : playList) {
+		element->play();
 	}
 }

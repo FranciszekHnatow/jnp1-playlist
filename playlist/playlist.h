@@ -12,16 +12,19 @@
 
 class PlayList : public Element {
 public:
-	void add(std::shared_ptr<Element> element);
-	void add(std::shared_ptr<Element> element, size_t position);
+	void play() const override;
+	void add(const std::shared_ptr<Element>& element);
+	void add(const std::shared_ptr<Element>& element, size_t position);
 	void remove();
 	void remove(size_t position);
 	void setMode(std::unique_ptr<Mode> mode);
 	PlayList() = default;
 	~PlayList();
 private:
-	std::deque<Element> elements;
+	std::deque<std::shared_ptr<Element>> elements;
 	std::unique_ptr<Mode> mode;
+
+	bool canAdd(const std::shared_ptr<Element>& element);
 };
 
 #endif //PLAYLIST_PLAYLIST_H

@@ -13,7 +13,7 @@ public:
 	explicit ShuffleMode(size_t seed) : engine(seed){};
 	~ShuffleMode() = default;
 
-	void play(std::deque<Element> const &playList) const override;
+	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
 private:
 	std::default_random_engine engine;
 };
