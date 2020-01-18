@@ -17,6 +17,4 @@ public:
 	~Mode() = default;
 };
 
-using pMode = std::unique_ptr<Mode>;
-
 #endif //PLAYLIST_BASEMODE_H

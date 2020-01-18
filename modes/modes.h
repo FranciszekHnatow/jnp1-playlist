@@ -12,8 +12,8 @@
 #include "sequencemode.h"
 
 
-pMode createOddEvenMode();
-pMode createShuffleMode(size_t seed);
-pMode createSequenceMode();
+std::unique_ptr<Mode> createOddEvenMode();
+std::unique_ptr<Mode> createShuffleMode(size_t seed);
+std::unique_ptr<Mode> createSequenceMode();
 
 #endif //PLAYLIST_MODES_H

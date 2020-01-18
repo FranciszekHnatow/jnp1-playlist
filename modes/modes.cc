@@ -4,14 +4,14 @@
 
 #include "modes.h"
 
-pMode createOddEvenMode() {
-	return pMode(new OddEvenMode());
+std::unique_ptr<Mode> createOddEvenMode() {
+	return std::unique_ptr<Mode>(new OddEvenMode());
 }
 
-pMode createShuffleMode(size_t seed) {
-	return pMode(new ShuffleMode(seed));
+std::unique_ptr<Mode> createShuffleMode(size_t seed) {
+	return std::unique_ptr<Mode>(new ShuffleMode(seed));
 }
 
-pMode createSequenceMode() {
-	return pMode(new SequenceMode());
+std::unique_ptr<Mode> createSequenceMode() {
+	return std::unique_ptr<Mode>(new SequenceMode());
 }

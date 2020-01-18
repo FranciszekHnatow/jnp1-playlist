@@ -16,7 +16,6 @@ public:
 	// playlisty w drzewie, żeby nie dodawać powtórek)
 };
 
-using pElement = std::unique_ptr<Element>;
 
 
 #endif //PLAYLIST_ELEMENT_H

@@ -12,14 +12,12 @@
 
 class PlayList : public Element {
 public:
-	void add(pElement element);
-	void add(pElement element, size_t position);
+	void add(std::unique_ptr<Element> element);
+	void add(std::unique_ptr<Element> element, size_t position);
 	void remove();
 	void remove(size_t position);
-	void setMode(pMode mode);
+	void setMode(std::unique_ptr<Mode> mode);
 
 };
-
-using pPlayList = std::unique_ptr<PlayList>;
 
 #endif //PLAYLIST_PLAYLIST_H
