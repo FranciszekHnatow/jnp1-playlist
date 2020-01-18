@@ -11,7 +11,6 @@
 class Element {
 public:
 	virtual void play() const = 0;
-	virtual bool isDisposable() = 0;
 	virtual bool canBeAdded(const std::shared_ptr<Element> &element) = 0;
 	Element() = default;
 	virtual ~Element() = default;

@@ -5,13 +5,13 @@
 #include "modes.h"
 
 std::unique_ptr<Mode> createOddEvenMode() {
-	return std::unique_ptr<Mode>(new OddEvenMode());
+	return std::make_unique<OddEvenMode>();
 }
 
 std::unique_ptr<Mode> createShuffleMode(size_t seed) {
-	return std::unique_ptr<Mode>(new ShuffleMode(seed));
+	return std::make_unique<ShuffleMode>(seed);
 }
 
 std::unique_ptr<Mode> createSequenceMode() {
-	return std::unique_ptr<Mode>(new SequenceMode());
+	return std::make_unique<SequenceMode>();
 }

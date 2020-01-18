@@ -9,7 +9,7 @@
 class SequenceMode : public Mode {
 public:
 	SequenceMode() = default;
-	~SequenceMode() = default;
+	~SequenceMode() override = default;
 
 	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
 };

@@ -9,7 +9,7 @@
 class OddEvenMode : public Mode {
 public:
 	OddEvenMode() = default;
-	~OddEvenMode() = default;
+	~OddEvenMode() override = default;
 
 	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
 };

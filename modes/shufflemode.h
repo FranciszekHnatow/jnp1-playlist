@@ -11,7 +11,7 @@
 class ShuffleMode : public Mode {
 public:
 	explicit ShuffleMode(size_t seed) : engine(seed){};
-	~ShuffleMode() = default;
+	~ShuffleMode() override = default;
 
 	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
 private:

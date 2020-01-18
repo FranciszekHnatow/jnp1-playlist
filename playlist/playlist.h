@@ -17,13 +17,15 @@ public:
 	void add(const std::shared_ptr<Element>& element, size_t position);
 	void remove();
 	void remove(size_t position);
-	void setMode(std::unique_ptr<Mode> mode);
+	void setMode(std::unique_ptr<Mode> newMode);
 	bool canBeAdded(const std::shared_ptr<Element>& element) override;
 	PlayList() = default;
-	~PlayList() override;
+	explicit PlayList(const char *name) : name(name) {};
+	~PlayList() override = default;
 private:
 	std::deque<std::shared_ptr<Element>> elements;
 	std::unique_ptr<Mode> mode;
+	std::string name;
 };
 
 #endif //PLAYLIST_PLAYLIST_H

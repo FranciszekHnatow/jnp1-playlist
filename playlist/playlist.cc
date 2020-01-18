@@ -4,19 +4,11 @@
 
 #include "playlist.h"
 
-PlayList::~PlayList() {
-	delete(mode.get());
-}
-
 void PlayList::play() const {
 	mode->play(elements);
 }
 
-void PlayList::setMode(std::unique_ptr<Mode> mode) {
-	if(this->mode) {
-		delete(mode.get());
-	}
-
+void PlayList::setMode(std::unique_ptr<Mode> newMode) {
 	this->mode = std::move(mode);
 }
 
@@ -33,16 +25,10 @@ void PlayList::add(const std::shared_ptr<Element>& element, size_t position) {
 }
 
 void PlayList::remove() {
-	if (elements.back().unique() && elements.back()->isDisposable()) {
-		delete(elements.back().get());
-	}
 	elements.pop_back();
 }
 
 void PlayList::remove(size_t position) {
-	if (elements[position - 1].unique() && elements[position]->isDisposable()) {
-		delete(elements.back().get());
-	}
 	elements.erase(elements.begin() + position);
 }
 
