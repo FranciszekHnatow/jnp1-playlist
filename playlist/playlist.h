@@ -20,7 +20,7 @@ public:
 	void setMode(std::unique_ptr<Mode> mode);
 	bool canBeAdded(const std::shared_ptr<Element>& element) override;
 	PlayList() = default;
-	~PlayList();
+	~PlayList() override;
 private:
 	std::deque<std::shared_ptr<Element>> elements;
 	std::unique_ptr<Mode> mode;
