@@ -8,7 +8,7 @@
 
 #include <memory>
 
-class Element {
+class Element : public std::enable_shared_from_this<Element> {
 public:
 	virtual void play() const = 0;
 	virtual bool canBeAdded(const std::shared_ptr<Element> &element) = 0;
