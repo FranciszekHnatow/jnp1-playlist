@@ -8,8 +8,8 @@ void PlayList::play() const {
 	mode->play(elements);
 }
 
-void PlayList::setMode(std::unique_ptr<Mode> newMode) {
-	this->mode = std::move(mode);
+void PlayList::setMode(std::shared_ptr<Mode> &newMode) {
+	this->mode = newMode;
 }
 
 void PlayList::add(const std::shared_ptr<Element>& element) {

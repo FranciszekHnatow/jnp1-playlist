@@ -4,14 +4,16 @@
 
 #include "modes.h"
 
-std::unique_ptr<Mode> createOddEvenMode() {
-	return std::make_unique<OddEvenMode>();
+std::shared_ptr<Mode> createOddEvenMode() {
+	static std::shared_ptr<OddEvenMode> instance = std::make_shared<OddEvenMode>();
+	return instance;
 }
 
-std::unique_ptr<Mode> createShuffleMode(size_t seed) {
-	return std::make_unique<ShuffleMode>(seed);
+std::shared_ptr<Mode> createShuffleMode(size_t seed) {
+	return std::make_shared<ShuffleMode>(seed);
 }
 
-std::unique_ptr<Mode> createSequenceMode() {
-	return std::make_unique<SequenceMode>();
+std::shared_ptr<Mode> createSequenceMode() {
+	static std::shared_ptr<SequenceMode> instance = std::make_shared<SequenceMode>();
+	return instance;
 }
