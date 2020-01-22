@@ -13,7 +13,7 @@
 
 class PlayList : public Element, public std::enable_shared_from_this<Element> {
 public:
-	void play() const override;
+	void play() override;
 	void add(const std::shared_ptr<Element>& element);
 	void add(const std::shared_ptr<Element>& element, size_t position);
 	void remove();

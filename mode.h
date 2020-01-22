@@ -13,7 +13,7 @@ class Element;
 // TODO tutaj na pewno przyda się Strategy i Factory Patterns
 class Mode {
 public:
-	virtual void play(std::deque<std::shared_ptr<Element>> const &playList) const = 0;
+	virtual void play(std::deque<std::shared_ptr<Element>> const &playList) = 0;
 	Mode() = default;
 	virtual ~Mode() = default;
 };

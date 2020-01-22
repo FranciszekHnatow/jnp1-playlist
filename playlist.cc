@@ -4,7 +4,7 @@
 
 #include "playlist.h"
 
-void PlayList::play() const {
+void PlayList::play() {
 	mode->play(elements);
 }
 

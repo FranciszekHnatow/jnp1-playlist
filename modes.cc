@@ -19,7 +19,7 @@ std::shared_ptr<Mode> createSequenceMode() {
 }
 
 // OddEvenMode (from oddevenmode.cc)
-void OddEvenMode::play(std::deque<std::shared_ptr<Element>> const &playList) const {
+void OddEvenMode::play(std::deque<std::shared_ptr<Element>> const &playList) {
 	size_t n = playList.size();
 
 	for (size_t i = 0; i < n; i += 2) {
@@ -33,19 +33,19 @@ void OddEvenMode::play(std::deque<std::shared_ptr<Element>> const &playList) con
 
 // SequenceMode (from sequencemode.cc)
 
-void SequenceMode::play(std::deque<std::shared_ptr<Element>> const &playList) const {
-	for (std::shared_ptr<Element> element : playList) {
+void SequenceMode::play(std::deque<std::shared_ptr<Element>> const &playList) {
+	for (const std::shared_ptr<Element>& element : playList) {
 		element->play();
 	}
 }
 
 // ShuffleMode (from shufflemode.cc)
 
-void ShuffleMode::play(std::deque<std::shared_ptr<Element>> const &playList) const {
-//	std::vector<size_t> indexes(playList.size());
-//	std::iota(indexes.begin(), indexes.end(), 0);
-//	std::shuffle(indexes.begin(), indexes.end(), engine);
-//	for (size_t index : indexes) {
-//		playList[index]->play();
-//	}
+void ShuffleMode::play(std::deque<std::shared_ptr<Element>> const &playList) {
+	std::vector<size_t> indexes(playList.size());
+	std::iota(indexes.begin(), indexes.end(), 0);
+	std::shuffle(indexes.begin(), indexes.end(), engine);
+	for (size_t index : indexes) {
+		playList[index]->play();
+	}
 }

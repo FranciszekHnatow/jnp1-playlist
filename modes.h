@@ -16,10 +16,10 @@ std::shared_ptr<Mode> createSequenceMode();
 //  ShuffleMode (from shufflemode.h)
 class ShuffleMode : public Mode {
 public:
-	explicit ShuffleMode(size_t seed) : engine(seed){};
+	explicit ShuffleMode(size_t seed) : engine(seed) {}
 	~ShuffleMode() override = default;
 
-	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
+	void play(std::deque<std::shared_ptr<Element>> const &playList) override;
 private:
 	std::default_random_engine engine;
 };
@@ -30,7 +30,7 @@ public:
 	OddEvenMode() = default;
 	~OddEvenMode() override = default;
 
-	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
+	void play(std::deque<std::shared_ptr<Element>> const &playList) override;
 };
 
 // SequenceMode (from sequence.h)
@@ -39,7 +39,7 @@ public:
 	SequenceMode() = default;
 	~SequenceMode() override = default;
 
-	void play(std::deque<std::shared_ptr<Element>> const &playList) const override;
+	void play(std::deque<std::shared_ptr<Element>> const &playList) override;
 };
 
 
