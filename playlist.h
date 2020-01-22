@@ -6,11 +6,12 @@
 #define PLAYLIST_PLAYLIST_H
 
 #include <cstddef>
+#include <iostream>
 #include "element.h"
 #include "mode.h"
 
 
-class PlayList : public Element {
+class PlayList : public Element, public std::enable_shared_from_this<Element> {
 public:
 	void play() const override;
 	void add(const std::shared_ptr<Element>& element);

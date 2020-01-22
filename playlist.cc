@@ -13,13 +13,13 @@ void PlayList::setMode(std::shared_ptr<Mode> &newMode) {
 }
 
 void PlayList::add(const std::shared_ptr<Element>& element) {
-	if (element->canBeAdded(std::shared_ptr<Element>(this))) {
+	if (element->canBeAdded(shared_from_this())) {
 		elements.push_back(element);
 	}
 }
 
 void PlayList::add(const std::shared_ptr<Element>& element, size_t position) {
-	if (element->canBeAdded(std::shared_ptr<Element>(this))) {
+	if (element->canBeAdded(shared_from_this())) {
 		elements.insert(elements.begin() + position, element);
 	}
 }

@@ -42,10 +42,10 @@ void SequenceMode::play(std::deque<std::shared_ptr<Element>> const &playList) co
 // ShuffleMode (from shufflemode.cc)
 
 void ShuffleMode::play(std::deque<std::shared_ptr<Element>> const &playList) const {
-	std::vector<size_t> indexes(playList.size());
-	std::iota(indexes.begin(), indexes.end(), 0);
-	std::shuffle(indexes.begin(), indexes.end(), engine);
-	for (size_t index : indexes) {
-		playList[index]->play();
-	}
+//	std::vector<size_t> indexes(playList.size());
+//	std::iota(indexes.begin(), indexes.end(), 0);
+//	std::shuffle(indexes.begin(), indexes.end(), engine);
+//	for (size_t index : indexes) {
+//		playList[index]->play();
+//	}
 }
