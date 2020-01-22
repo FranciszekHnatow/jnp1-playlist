@@ -1,7 +1,3 @@
-//
-// Created by franciszek on 11.01.2020.
-//
-
 #ifndef PLAYLIST_ELEMENT_H
 #define PLAYLIST_ELEMENT_H
 

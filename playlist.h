@@ -7,7 +7,7 @@
 
 #include <cstddef>
 #include "element.h"
-#include "../modes/mode.h"
+#include "mode.h"
 
 
 class PlayList : public Element {

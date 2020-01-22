@@ -5,7 +5,7 @@
 #ifndef PLAYLIST_LIB_PLAYLIST_H
 #define PLAYLIST_LIB_PLAYLIST_H
 
-#include "playlist/player.h"
-#include "modes/modes.h"
+#include "player.h"
+#include "modes.h"
 
 #endif //PLAYLIST_LIB_PLAYLIST_H
