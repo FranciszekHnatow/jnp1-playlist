@@ -1,6 +1,7 @@
 #ifndef PLAYLIST_MEDIA_H
 #define PLAYLIST_MEDIA_H
 
+#include <string>
 #include "element.h"
 
 // Media
@@ -14,7 +15,24 @@ public:
 // Audio
 
 class Audio : Media {
+public:
+	Audio(std::string creator);
+	
+private:
+	std::string title;
+	std::string artist;
+	std::string content;
+};
 
+// Video
+
+class Video : Media {
+public:
+	Video(std::string creator);
+private:
+	std::string title;
+	std::string content;
+	int year;
 };
 
 
@@ -23,14 +41,12 @@ class Audio : Media {
 class File {
 public:
 	File(const char *content);
+	std::string getContent();
+
+private:
+	std::string content;
 };
 
-
-// Video
-
-class Video : Media {
-
-};
 
 #endif //PLAYLIST_MEDIA_H
 
