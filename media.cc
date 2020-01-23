@@ -13,7 +13,6 @@ bool Media::canBeAdded(const std::shared_ptr<Element> &element) {
 	return true;
 }
 
-
 // Audio
 
 Audio::Audio(std::string &creator) {
@@ -25,11 +24,9 @@ Audio::Audio(std::string &creator) {
 	std::string artistUncutted = first_match(creator, artist_regex);
 	std::string titleUncutted = first_match(creator, title_regex);
 
-	std::string artist = artistUncutted.substr(7, artistUncutted.size() - 8);
-	std::string title = titleUncutted.substr(6, titleUncutted.size() - 7);
+	artist = artistUncutted.substr(7, artistUncutted.size() - 8);
+	title = titleUncutted.substr(6, titleUncutted.size() - 7);
 
-	this->title = title;
-	this->artist = artist;
 	this->content = creator;
 }
 
@@ -45,14 +42,12 @@ Video::Video(std::string &creator) {
 	std::string titleUncutted = first_match(creator, title_regex);
 	std::string yearUncutted = first_match(creator, year_regex);
 
-	std::string title = titleUncutted.substr(6, titleUncutted.size() - 7);
-	std::string year = titleUncutted.substr(5, yearUncutted.size() - 6);
+	title = titleUncutted.substr(6, titleUncutted.size() - 7);
+	year = std::stoi(titleUncutted.substr(5, yearUncutted.size() - 6));
 
 	rot13(creator);
 
-	this->title = title;
 	//TODO exception:
-	this->year = std::stoi(year);
 	this->content = creator;
 }
 
@@ -78,14 +73,14 @@ std::string first_match(std::string &text, std::regex &r) {
 }
 
 void rot13(std::string &text) {
-	for(size_t i = 0; i < text.size(); i++) {
-		int a = text[i];
+	for(char & i : text) {
+		int a = i;
 		if(a >= 97) {
 			a = (a - 'a' - 13 + 26)%26 + 'a';
 		}
 		else {
 			a = (a - 'A' - 13 + 26) %26 + 'A';
 		}
-		text[i] = char(a);
+		i = char(a);
 	}
 }
