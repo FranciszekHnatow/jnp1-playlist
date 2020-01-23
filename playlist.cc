@@ -3,6 +3,7 @@
 //
 
 #include "playlist.h"
+#include "exceptions.h"
 
 void PlayList::play() {
 	mode->play(elements);
@@ -19,6 +20,10 @@ void PlayList::add(const std::shared_ptr<Element>& element) {
 }
 
 void PlayList::add(const std::shared_ptr<Element>& element, size_t position) {
+	if (position > elements.size()) {
+		throw IndexOutOfBoundsException();
+	}
+
 	if (element->canBeAdded(shared_from_this())) {
 		elements.insert(elements.begin() + position, element);
 	}

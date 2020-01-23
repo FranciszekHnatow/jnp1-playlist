@@ -7,5 +7,6 @@
 
 #include "player.h"
 #include "modes.h"
+#include "exceptions.h"
 
 #endif //PLAYLIST_LIB_PLAYLIST_H
