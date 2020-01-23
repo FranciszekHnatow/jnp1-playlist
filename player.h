@@ -1,6 +1,7 @@
 #ifndef PLAYLIST_PLAYER_H
 #define PLAYLIST_PLAYER_H
 
+#include "exceptions.h"
 #include "media.h"
 #include "playlist.h"
 

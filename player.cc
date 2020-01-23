@@ -1,5 +1,4 @@
 #include "player.h"
-#include "media.h"
 
 #include<regex>
 
@@ -17,16 +16,13 @@ std::shared_ptr<Media> Player::openFile(File file) {
 
 	std::string toConvert = file.getContent();
 
-	// TODO krzyczy na returnowane :c 
 	if(std::regex_match(toConvert, audio_regex)) {
 		return std::static_pointer_cast<Media>(std::make_shared<Audio>(toConvert));
-	}
-	if(std::regex_match(toConvert, video_regex)) {
+	} else if(std::regex_match(toConvert, video_regex)) {
 		return std::static_pointer_cast<Media>(std::make_shared<Video>(toConvert));
+	} else {
+		throw UnsupportedFormatException();
 	}
-	// TODO: throw exception - incorrect title
-
-	return nullptr;
 }
 
 
