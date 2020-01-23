@@ -31,7 +31,7 @@ Audio::Audio(Metadata& metadata, std::string file_content) {
 }
 
 void Audio::play() {
-	std::cout << "Song [" << artist << ", " << title << "]:\n" << content;
+	std::cout << "Song [" << artist << ", " << title << "]:\n" << content << std::endl;
 }
 
 // Video
@@ -57,7 +57,7 @@ Video::Video(Metadata& metadata, std::string file_content) {
 }
 
 void Video::play() {
-	std::cout << "Movie [" << title << ", " << year << "]:\n" << content;
+	std::cout << "Movie [" << title << ", " << year << "]:\n" << content << std::endl;
 }
 
 // File
