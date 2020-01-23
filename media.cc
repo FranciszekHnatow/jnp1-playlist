@@ -66,6 +66,12 @@ Video::Video(std::string &creator) {
 
 File::File(const char* content) {
 	std::string helper(content);
+
+	std::regex file_regex ("[\\w]*(\\|[^:\\n\\|]*:[^:\\n\\|]*)*\\|.*");
+	if(!std::regex_match(content, file_regex)) {
+		// todo: throw exception
+	}
+
 	this->content = helper;
 }
 
@@ -79,7 +85,6 @@ std::string first_match(std::string &text, std::regex &r) {
     std::smatch match;
     std::regex_search(text, match, r);
     std::string res = match.str(0);
-    text = match.suffix().str();
     return res;
 }
 

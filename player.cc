@@ -11,10 +11,11 @@ std::shared_ptr<Audio> get_audio(std::string &toConvert) {
 }
 
 std::shared_ptr<Media> Player::openFile(File file) {
-	std::regex audio_regex ("^audio\\|artist:(\\w|\\d|\\s)*\\|title:(\\w|\\d|\\s)*\\|.*");
-	std::regex video_regex("^video\\|title:(\\w|\\d|\\s)*\\|year:(\\d)*\\|.*");
-
 	std::string toConvert = file.getContent();
+	
+	std::regex audio_regex ("^audio(\\|[^:\\n\\|]*:[^:\\n\\|]*)*\\|.*");
+	std::regex video_regex("^video(\\|[^:\\n\\|]*:[^:\\n\\|]*)*\\|.*");
+
 
 	if(std::regex_match(toConvert, audio_regex)) {
 		return std::static_pointer_cast<Media>(std::make_shared<Audio>(toConvert));
