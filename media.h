@@ -8,16 +8,18 @@
 class Media : public Element {
 public:
 	bool canBeAdded(const std::shared_ptr<Element> &element) override;
+	~Media() override = default;
 };
 
 // Playlist w osobnym pliku
 
 // Audio
 
-class Audio : Media {
+class Audio : public Media {
 public:
-	Audio(std::string creator);
-	
+	Audio(std::string &creator);
+	~Audio() override = default;
+	void play() override {}
 private:
 	std::string title;
 	std::string artist;
@@ -26,9 +28,11 @@ private:
 
 // Video
 
-class Video : Media {
+class Video : public Media {
 public:
-	Video(std::string creator);
+	Video(std::string &creator);
+	~Video() override = default;
+	void play() override {}
 private:
 	std::string title;
 	std::string content;

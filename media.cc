@@ -16,7 +16,7 @@ bool Media::canBeAdded(const std::shared_ptr<Element> &element) {
 
 // Audio
 
-Audio::Audio(std::string creator) {
+Audio::Audio(std::string &creator) {
 	std::regex beginning_regex("audio\\|");
 	std::regex artist_regex("artist:(\\w\\d\\s)*\\|");
 	std::regex title_regex("title:(\\w\\d\\s)*\\|");
@@ -35,7 +35,7 @@ Audio::Audio(std::string creator) {
 
 // Video
 
-Video::Video(std::string creator) {
+Video::Video(std::string &creator) {
 
 	std::regex beginning_regex("video\\|");
 	std::regex title_regex("title:(\\w\\d\\s)*\\|");

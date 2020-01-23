@@ -8,7 +8,7 @@ void PlayList::play() {
 	mode->play(elements);
 }
 
-void PlayList::setMode(std::shared_ptr<Mode> &newMode) {
+void PlayList::setMode(std::shared_ptr<Mode> newMode) {
 	this->mode = newMode;
 }
 
