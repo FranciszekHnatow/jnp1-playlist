@@ -10,15 +10,19 @@
 class PlayerException : public std::exception{};
 
 class CorruptedFileException : public PlayerException {
-	[[nodiscard]] const char* what() const noexcept override {return "aha";};
+	[[nodiscard]] const char* what() const noexcept override;
 };
 
 class CorruptedFileContentException : public PlayerException {
-	[[nodiscard]] const char* what() const noexcept override {return "aha2";};
+	[[nodiscard]] const char* what() const noexcept override;
 };
 
 class UnsupportedFormatException : public PlayerException {
-	[[nodiscard]] const char* what() const noexcept override {return "aha3";};
+	[[nodiscard]] const char* what() const noexcept override;
+};
+
+class IndexOutOfBoundsException : public PlayerException {
+	[[nodiscard]] const char* what() const noexcept override;
 };
 
 
