@@ -18,10 +18,10 @@ bool Media::canBeAdded(const std::shared_ptr<Element> &element) {
 // Audio
 
 Audio::Audio(Metadata& metadata, std::string file_content) {
-
+	std::regex content_regex("[,.!?':;\\-\\.a-zA-z\\s]*");
 	auto it_title = metadata.find("title");
 	auto it_artist = metadata.find("artist");
-	if (it_artist == metadata.end() || it_title == metadata.end()) {
+	if (it_artist == metadata.end() || it_title == metadata.end() || !std::regex_match(file_content, content_regex)) {
 		throw CorruptedFileContentException();
 	}
 
@@ -37,9 +37,10 @@ void Audio::play() {
 // Video
 
 Video::Video(Metadata& metadata, std::string file_content) {
+	std::regex content_regex("[,.!?':;\\-\\.a-zA-z\\s]*");
 	auto it_title = metadata.find("title");
 	auto it_year = metadata.find("year");
-	if (it_year == metadata.end() || it_title == metadata.end()) {
+	if (it_year == metadata.end() || it_title == metadata.end() || !std::regex_match(file_content, content_regex)) {
 		throw CorruptedFileContentException();
 	}
 
