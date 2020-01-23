@@ -19,3 +19,7 @@ const char* UnsupportedFormatException::what() const noexcept {
 const char *IndexOutOfBoundsException::what() const noexcept {
 	return "Index out of bounds";
 }
+
+const char *AttemptedCycleCreationException::what() const noexcept {
+	return "Cannot add element, because doing so would create cyclic relation";
+}
