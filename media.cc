@@ -1,8 +1,9 @@
 #include "media.h"
 #include <regex>
 #include <string>
+#include<iostream>
 
-// UTIL FUNCTION
+// UTIL FUNCTIONS DECLARATION
 std::string first_match(std::string &text, std::regex &r);
 
 void rot13(std::string &text);
@@ -17,16 +18,21 @@ bool Media::canBeAdded(const std::shared_ptr<Element> &element) {
 
 Audio::Audio(std::string &creator) {
 	std::regex beginning_regex("audio\\|");
-	std::regex artist_regex("artist:(\\w\\d\\s)*\\|");
-	std::regex title_regex("title:(\\w\\d\\s)*\\|");
+	std::regex artist_regex("artist:[^\\|]*\\|");
+	std::regex title_regex("title:[^\\|]*\\|");
 
 	std::string helper = first_match(creator, beginning_regex);
 	std::string artistUncutted = first_match(creator, artist_regex);
 	std::string titleUncutted = first_match(creator, title_regex);
+	
+	artistUncutted.erase(artistUncutted.begin(), artistUncutted.begin()+7);
+	artistUncutted.erase(artistUncutted.end()-1, artistUncutted.end());
+	
+	titleUncutted.erase(titleUncutted.begin(), titleUncutted.begin()+6);
+	titleUncutted.erase(titleUncutted.end()-1, titleUncutted.end());
 
-	artist = artistUncutted.substr(7, artistUncutted.size() - 8);
-	title = titleUncutted.substr(6, titleUncutted.size() - 7);
-
+	this->artist = artistUncutted;
+	this->title = titleUncutted;
 	this->content = creator;
 }
 
@@ -34,20 +40,25 @@ Audio::Audio(std::string &creator) {
 
 Video::Video(std::string &creator) {
 
-	std::regex beginning_regex("video\\|");
-	std::regex title_regex("title:(\\w\\d\\s)*\\|");
-	std::regex year_regex("year:(\\d)*\\|");
+	std::regex beginning_regex("audio\\|");
+	std::regex year_regex("year:[^\\|]*\\|");
+	std::regex title_regex("title:[^\\|]*\\|");
 
 	std::string helper = first_match(creator, beginning_regex);
 	std::string titleUncutted = first_match(creator, title_regex);
 	std::string yearUncutted = first_match(creator, year_regex);
 
-	title = titleUncutted.substr(6, titleUncutted.size() - 7);
-	year = std::stoi(titleUncutted.substr(5, yearUncutted.size() - 6));
+	titleUncutted.erase(titleUncutted.begin(), titleUncutted.begin()+6);
+	titleUncutted.erase(titleUncutted.end()-1, titleUncutted.end());
+	
+	yearUncutted.erase(yearUncutted.begin(), yearUncutted.begin()+5);
+	yearUncutted.erase(yearUncutted.end()-1, yearUncutted.end());
 
 	rot13(creator);
 
-	//TODO exception:
+	//TODO exception na stoi(jaki?)
+	this->title = titleUncutted;
+	this->year = std::stoi(yearUncutted);
 	this->content = creator;
 }
 
@@ -62,7 +73,7 @@ std::string File::getContent() {
 	return this->content;
 }
 
-/* UTIL FUNCTION */
+/* UTIL FUNCTIONS */
 
 std::string first_match(std::string &text, std::regex &r) {
     std::smatch match;
@@ -75,12 +86,13 @@ std::string first_match(std::string &text, std::regex &r) {
 void rot13(std::string &text) {
 	for(char & i : text) {
 		int a = i;
-		if(a >= 97) {
+		if(a >= 'a' && a  <= 'z') {
 			a = (a - 'a' - 13 + 26)%26 + 'a';
+			i = char(a);
 		}
-		else {
+		else if(a >= 'A' && a <= 'Z') {
 			a = (a - 'A' - 13 + 26) %26 + 'A';
+			i = char(a);
 		}
-		i = char(a);
 	}
 }
