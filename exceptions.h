@@ -25,6 +25,10 @@ class IndexOutOfBoundsException : public PlayerException {
 	[[nodiscard]] const char* what() const noexcept override;
 };
 
+class AttemptedCycleCreationException : public PlayerException {
+	[[nodiscard]] const char* what() const noexcept override;
+};
+
 
 
 

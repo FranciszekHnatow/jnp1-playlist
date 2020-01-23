@@ -3,6 +3,8 @@
 //
 
 #include "playlist.h"
+
+#include <utility>
 #include "exceptions.h"
 
 void PlayList::play() {
@@ -10,12 +12,14 @@ void PlayList::play() {
 }
 
 void PlayList::setMode(std::shared_ptr<Mode> newMode) {
-	this->mode = newMode;
+	this->mode = std::move(newMode);
 }
 
 void PlayList::add(const std::shared_ptr<Element>& element) {
 	if (element->canBeAdded(shared_from_this())) {
 		elements.push_back(element);
+	} else {
+		throw AttemptedCycleCreationException();
 	}
 }
 
@@ -26,6 +30,8 @@ void PlayList::add(const std::shared_ptr<Element>& element, size_t position) {
 
 	if (element->canBeAdded(shared_from_this())) {
 		elements.insert(elements.begin() + position, element);
+	} else {
+		throw AttemptedCycleCreationException();
 	}
 }
 
