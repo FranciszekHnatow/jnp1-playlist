@@ -8,14 +8,14 @@ std::shared_ptr<PlayList> Player::createPlaylist(const char *name) {
 }
 
 
-std::shared_ptr<Media> Player::openFile(File file) {
+std::shared_ptr<Element> Player::openFile(File file) {
 	std::string fileContent = file.getContent();
 	std::string type = file.getType();
 
 	if (type == "audio") {
-		return std::static_pointer_cast<Media>(std::make_shared<Audio>(file.getMetadata(), file.getContent()));
+		return std::static_pointer_cast<Element>(std::make_shared<Audio>(file.getMetadata(), file.getContent()));
 	} else if (type == "video") {
-		return std::static_pointer_cast<Media>(std::make_shared<Video>(file.getMetadata(), file.getContent()));
+		return std::static_pointer_cast<Element>(std::make_shared<Video>(file.getMetadata(), file.getContent()));
 	} else {
 		throw UnsupportedFormatException();
 	}

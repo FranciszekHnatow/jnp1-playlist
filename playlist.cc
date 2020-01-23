@@ -16,10 +16,6 @@ void PlayList::setMode(std::shared_ptr<Mode> newMode) {
 	this->mode = std::move(newMode);
 }
 
-PlayList::PlayList() {
-	mode = createSequenceMode();
-}
-
 void PlayList::add(const std::shared_ptr<Element>& element) {
 	if (element->canBeAdded(shared_from_this())) {
 		elements.push_back(element);
@@ -60,4 +56,9 @@ bool PlayList::canBeAdded(const std::shared_ptr<Element> &element) {
 	}
 
 	return true;
+}
+
+PlayList::PlayList(std::string name) {
+	this->name = name;
+	this->mode = std::move(createSequenceMode());
 }

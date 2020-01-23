@@ -30,6 +30,10 @@ Audio::Audio(Metadata& metadata, std::string file_content) {
 	this->title = it_title->second;
 }
 
+void Audio::play() {
+	std::cout << "Song [" << artist << ", " << title << "]:\n" << content;
+}
+
 // Video
 
 Video::Video(Metadata& metadata, std::string file_content) {
@@ -49,6 +53,10 @@ Video::Video(Metadata& metadata, std::string file_content) {
 	} catch (std::invalid_argument &e) {
 		throw CorruptedFileContentException();
 	}
+}
+
+void Video::play() {
+	std::cout << "Movie [" << title << ", " << year << "]:\n" << content;
 }
 
 // File

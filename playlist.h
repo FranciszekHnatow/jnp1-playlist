@@ -20,8 +20,7 @@ public:
 	void remove(size_t position);
 	void setMode(std::shared_ptr<Mode> newMode);
 	bool canBeAdded(const std::shared_ptr<Element>& element) override;
-	PlayList();
-	explicit PlayList(const char *name) : name(name) {};
+	explicit PlayList(std::string name);
 	~PlayList() override = default;
 private:
 	std::deque<std::shared_ptr<Element>> elements;

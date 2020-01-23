@@ -22,7 +22,7 @@ class Audio : public Media {
 public:
 	explicit Audio(Metadata& metadata, std::string file_content);
 	~Audio() override = default;
-	void play() override {}
+	void play() override;
 private:
 	std::string title;
 	std::string artist;
@@ -35,7 +35,7 @@ class Video : public Media {
 public:
 	explicit Video(Metadata& metadata, std::string file_content);
 	~Video() override = default;
-	void play() override {}
+	void play() override;
 private:
 	std::string title;
 	std::string content;
