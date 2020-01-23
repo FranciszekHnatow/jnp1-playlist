@@ -79,7 +79,8 @@ File::File(const char* content) {
 		size_t delim_pos = (*it).find(':');
 		std::string key = (*it).substr(0, delim_pos);
 		std::string value = (*it).substr(delim_pos + 1);
-		metadata.insert(key, value);
+		metadata.insert({key, value});
+		it++;
 	}
 
 	std::string new_file_contents;

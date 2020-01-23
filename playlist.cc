@@ -6,6 +6,7 @@
 
 #include <utility>
 #include "exceptions.h"
+#include "modes.h"
 
 void PlayList::play() {
 	mode->play(elements);
@@ -13,6 +14,10 @@ void PlayList::play() {
 
 void PlayList::setMode(std::shared_ptr<Mode> newMode) {
 	this->mode = std::move(newMode);
+}
+
+PlayList::PlayList() {
+	mode = createSequenceMode();
 }
 
 void PlayList::add(const std::shared_ptr<Element>& element) {
