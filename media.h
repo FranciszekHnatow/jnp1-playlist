@@ -2,8 +2,11 @@
 #define PLAYLIST_MEDIA_H
 
 #include <string>
+#include <unordered_map>
 #include "element.h"
 
+
+using Metadata = std::unordered_map<std::string, std::string>;
 // Media
 class Media : public Element {
 public:
@@ -17,7 +20,7 @@ public:
 
 class Audio : public Media {
 public:
-	Audio(std::string &creator);
+	explicit Audio(Metadata& metadata, std::string file_content);
 	~Audio() override = default;
 	void play() override {}
 private:
@@ -30,7 +33,7 @@ private:
 
 class Video : public Media {
 public:
-	Video(std::string &creator);
+	explicit Video(Metadata& metadata, std::string file_content);
 	~Video() override = default;
 	void play() override {}
 private:
@@ -44,11 +47,15 @@ private:
 
 class File {
 public:
-	File(const char *content);
+	explicit File(const char *content);
 	std::string getContent();
+	std::string getType();
+	Metadata& getMetadata();
 
 private:
-	std::string content;
+	std::string type;
+	std::string file_contents;
+	Metadata metadata;
 };
 
 

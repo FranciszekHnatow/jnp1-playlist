@@ -1,7 +1,8 @@
 #include "media.h"
+#include "exceptions.h"
 #include <regex>
 #include <string>
-#include<iostream>
+#include <iostream>
 
 // UTIL FUNCTIONS DECLARATION
 std::string first_match(std::string &text, std::regex &r);
@@ -16,67 +17,91 @@ bool Media::canBeAdded(const std::shared_ptr<Element> &element) {
 
 // Audio
 
-Audio::Audio(std::string &creator) {
-	std::regex beginning_regex("audio\\|");
-	std::regex artist_regex("artist:[^\\|]*\\|");
-	std::regex title_regex("title:[^\\|]*\\|");
+Audio::Audio(Metadata& metadata, std::string file_content) {
 
-	std::string helper = first_match(creator, beginning_regex);
-	std::string artistUncutted = first_match(creator, artist_regex);
-	std::string titleUncutted = first_match(creator, title_regex);
-	
-	artistUncutted.erase(artistUncutted.begin(), artistUncutted.begin()+7);
-	artistUncutted.erase(artistUncutted.end()-1, artistUncutted.end());
-	
-	titleUncutted.erase(titleUncutted.begin(), titleUncutted.begin()+6);
-	titleUncutted.erase(titleUncutted.end()-1, titleUncutted.end());
+	auto it_title = metadata.find("title");
+	auto it_artist = metadata.find("artist");
+	if (it_artist == metadata.end() || it_title == metadata.end()) {
+		throw CorruptedFileContentException();
+	}
 
-	this->artist = artistUncutted;
-	this->title = titleUncutted;
-	this->content = creator;
+	this->content = file_content;
+	this->artist = it_artist->second;
+	this->title = it_title->second;
 }
 
 // Video
 
-Video::Video(std::string &creator) {
+Video::Video(Metadata& metadata, std::string file_content) {
+	auto it_title = metadata.find("title");
+	auto it_year = metadata.find("year");
+	if (it_year == metadata.end() || it_title == metadata.end()) {
+		throw CorruptedFileContentException();
+	}
 
-	std::regex beginning_regex("audio\\|");
-	std::regex year_regex("year:[^\\|]*\\|");
-	std::regex title_regex("title:[^\\|]*\\|");
 
-	std::string helper = first_match(creator, beginning_regex);
-	std::string titleUncutted = first_match(creator, title_regex);
-	std::string yearUncutted = first_match(creator, year_regex);
+	rot13(file_content);
 
-	titleUncutted.erase(titleUncutted.begin(), titleUncutted.begin()+6);
-	titleUncutted.erase(titleUncutted.end()-1, titleUncutted.end());
-	
-	yearUncutted.erase(yearUncutted.begin(), yearUncutted.begin()+5);
-	yearUncutted.erase(yearUncutted.end()-1, yearUncutted.end());
-
-	rot13(creator);
-
-	//TODO exception na stoi(jaki?)
-	this->title = titleUncutted;
-	this->year = std::stoi(yearUncutted);
-	this->content = creator;
+	this->content = file_content;
+	this->title = it_title->second;
+	try {
+		this->year = std::stoi(it_year->second);
+	} catch (std::invalid_argument &e) {
+		throw CorruptedFileContentException();
+	}
 }
 
 // File
 
 File::File(const char* content) {
 	std::string helper(content);
-
 	std::regex file_regex ("[\\w]*(\\|[^:\\n\\|]*:[^:\\n\\|]*)*\\|.*");
+	std::regex part_regex ("[\\w]*:[^\\|]*");
+	std::vector<std::string> parts;
 	if(!std::regex_match(content, file_regex)) {
-		// todo: throw exception
+		throw CorruptedFileException();
 	}
 
-	this->content = helper;
+	std::istringstream ss(helper);
+	std::string token;
+
+	while (std::getline(ss, token, '|')) {
+		if (token.length() > 0)
+			parts.push_back(token);
+	}
+
+	auto it = parts.begin();
+
+	type = *it;
+	it++;
+
+	while (it != parts.end() && std::regex_match(*it, part_regex)) {
+		size_t delim_pos = (*it).find(':');
+		std::string key = (*it).substr(0, delim_pos);
+		std::string value = (*it).substr(delim_pos + 1);
+		metadata.insert(key, value);
+	}
+
+	std::string new_file_contents;
+
+	while (it != parts.end()) {
+		new_file_contents += *it;
+		it++;
+	}
+
+	file_contents = new_file_contents;
 }
 
 std::string File::getContent() {
-	return this->content;
+	return file_contents;
+}
+
+std::string File::getType() {
+	return type;
+}
+
+std::unordered_map<std::string, std::string>& File::getMetadata() {
+	return metadata;
 }
 
 /* UTIL FUNCTIONS */

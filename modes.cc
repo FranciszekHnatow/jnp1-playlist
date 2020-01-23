@@ -9,7 +9,7 @@ std::shared_ptr<Mode> createOddEvenMode() {
 	return instance;
 }
 
-std::shared_ptr<Mode> createShuffleMode(size_t seed) {
+std::shared_ptr<Mode> createShuffleMode(std::default_random_engine::result_type seed) {
 	return std::make_shared<ShuffleMode>(seed);
 }
 

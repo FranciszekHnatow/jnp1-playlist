@@ -9,7 +9,7 @@
 
 //modes.h
 std::shared_ptr<Mode> createOddEvenMode();
-std::shared_ptr<Mode> createShuffleMode(size_t seed);
+std::shared_ptr<Mode> createShuffleMode(std::default_random_engine::result_type seed);
 std::shared_ptr<Mode> createSequenceMode();
 
 
