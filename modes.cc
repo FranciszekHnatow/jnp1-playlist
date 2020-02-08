@@ -22,13 +22,13 @@ std::shared_ptr<Mode> createSequenceMode() {
 void OddEvenMode::play(std::deque<std::shared_ptr<Element>> const &playList) {
 	size_t n = playList.size();
 
-	for (size_t i = 0; i < n; i += 2) {
-		playList[i]->play();
-	}
-
 	for (size_t i = 1; i < n; i += 2) {
 		playList[i]->play();
 	}
+
+    for (size_t i = 0; i < n; i += 2) {
+      playList[i]->play();
+    }
 }
 
 // SequenceMode (from sequencemode.cc)

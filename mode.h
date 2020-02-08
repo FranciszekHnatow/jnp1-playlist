@@ -9,8 +9,6 @@
 #include <memory>
 class Element;
 
-
-// TODO tutaj na pewno przyda się Strategy i Factory Patterns
 class Mode {
 public:
 	virtual void play(std::deque<std::shared_ptr<Element>> const &playList) = 0;

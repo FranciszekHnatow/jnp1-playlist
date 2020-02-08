@@ -11,14 +11,14 @@ void rot13(std::string &text);
 
 
 // Media
-bool Media::canBeAdded(const std::shared_ptr<Element> &element) {
+bool Media::canBeAdded([[maybe_unused]] const std::shared_ptr<Element> &element) {
 	return true;
 }
 
 // Audio
 
 Audio::Audio(Metadata& metadata, std::string file_content) {
-	std::regex content_regex("[,.!?':;\\-\\.a-zA-z\\s]*");
+	std::regex content_regex("[,.!?':;\\-\\.a-zA-z0-9\\s]*");
 	auto it_title = metadata.find("title");
 	auto it_artist = metadata.find("artist");
 	if (it_artist == metadata.end() || it_title == metadata.end() || !std::regex_match(file_content, content_regex)) {
@@ -31,13 +31,13 @@ Audio::Audio(Metadata& metadata, std::string file_content) {
 }
 
 void Audio::play() {
-	std::cout << "Song [" << artist << ", " << title << "]:\n" << content << std::endl;
+	std::cout << "Song [" << artist << ", " << title << "]: " << content << std::endl;
 }
 
 // Video
 
 Video::Video(Metadata& metadata, std::string file_content) {
-	std::regex content_regex("[,.!?':;\\-\\.a-zA-z\\s]*");
+	std::regex content_regex("[,.!?':;\\-\\.a-zA-z0-9\\s]*");
 	auto it_title = metadata.find("title");
 	auto it_year = metadata.find("year");
 	if (it_year == metadata.end() || it_title == metadata.end() || !std::regex_match(file_content, content_regex)) {
@@ -57,7 +57,7 @@ Video::Video(Metadata& metadata, std::string file_content) {
 }
 
 void Video::play() {
-	std::cout << "Movie [" << title << ", " << year << "]:\n" << content << std::endl;
+	std::cout << "Movie [" << title << ", " << year << "]: " << content << std::endl;
 }
 
 // File
@@ -77,6 +77,10 @@ File::File(const char* content) {
 	while (std::getline(ss, token, '|')) {
 		if (token.length() > 0)
 			parts.push_back(token);
+	}
+
+	if (parts.empty()) {
+	    throw CorruptedFileContentException();
 	}
 
 	auto it = parts.begin();

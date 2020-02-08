@@ -9,6 +9,7 @@
 #include "modes.h"
 
 void PlayList::play() {
+    std::cout << "Playlist [" + this->name + "]\n";
 	mode->play(elements);
 }
 
@@ -41,6 +42,10 @@ void PlayList::remove() {
 }
 
 void PlayList::remove(size_t position) {
+    if (position > elements.size() - 1) {
+        throw IndexOutOfBoundsException();
+    }
+
 	elements.erase(elements.begin() + position);
 }
 
